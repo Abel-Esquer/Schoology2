@@ -18,7 +18,8 @@ namespace Schoology2.Core.Entidades
         public string Contraseña { get; set; }
         public string Rol { get; set; }
 
-        enum rol {
+        enum roles
+        {
             Admin,
             Alumno,
             Profesor
@@ -61,9 +62,9 @@ namespace Schoology2.Core.Entidades
             }
             return usuarios;
         }
-       
+
         //Agregar y Editar
-        public static bool Guardar (int id, string nombre, string correo, string apellido, string contraseña, string rol)
+        public static bool Guardar(int id, string nombre, string apellido, string correo, string contraseña, string rol)
         {
             bool result = false;
             try
@@ -75,7 +76,7 @@ namespace Schoology2.Core.Entidades
 
                     if (id == 0)
                     {
-                        cmd.CommandText = "INSERT INTO usuario (nombre, apellido, correo, contraseña, rol) VALUES (@nombre, @apellido, @correo, @contraseña, @rol";
+                        cmd.CommandText = "INSERT INTO usuario (nombre, apellido, correo, contraseña, rol) VALUES (@nombre, @apellido, @correo, @contraseña, @rol)";
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@apellido", apellido);
                         cmd.Parameters.AddWithValue("@correo", correo);
@@ -84,7 +85,7 @@ namespace Schoology2.Core.Entidades
                     }
                     else
                     {
-                        cmd.CommandText = "UPDATE usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, contraseña = @contraseña, rol = @rol WHERE id = @id" +
+                        cmd.CommandText = "UPDATE usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, contraseña = @contraseña, rol = @rol WHERE id = @id";
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
                         cmd.Parameters.AddWithValue("@apellido", apellido);
@@ -105,27 +106,20 @@ namespace Schoology2.Core.Entidades
         public static bool Eliminar(int id)
         {
             bool result = false;
-            Usuario usuario = new Usuario();
             try
             {
                 Conexion conexion = new Conexion();
                 if (conexion.OpenConnection())
                 {
-
                     MySqlCommand cmd = conexion.connection.CreateCommand();
                     cmd.CommandText = "DELETE FROM usuario WHERE id = @id";
-
                     cmd.Parameters.AddWithValue("@id", id);
-
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    dataReader.Close();
-                    conexion.CloseConnection();
                     result = cmd.ExecuteNonQuery() == 1;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw (ex);
+                throw e;
             }
             return result;
         }
@@ -164,8 +158,8 @@ namespace Schoology2.Core.Entidades
             }
             return usuario;
         }
+
     }
-    
 }
 
 

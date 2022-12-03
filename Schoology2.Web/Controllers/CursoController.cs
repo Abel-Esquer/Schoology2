@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Schoology2.Core.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace Schoology2.Web.Controllers
         // GET: Curso
         public ActionResult Index()
         {
-            return View();
+            List<Curso> cursos = Curso.GetAll();
+            return View(cursos);
         }
     }
 }

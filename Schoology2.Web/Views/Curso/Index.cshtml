@@ -1,10 +1,10 @@
 ﻿@using Schoology2.Core.Entidades
-@model List<Usuario>
+@model List<Curso>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Usuarios</h1>
+                <h1 class="page-header">Cursos</h1>
             </div>
         </div>
 
@@ -13,41 +13,37 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        <a href="@Url.Action("Registro", "Usuario", new { id = 0 })" class="btn btn-success">Agregar nuevo</a>
+                        @*<a href="@Url.Action("Registro", "Estado", new { id = 0 })" class="btn btn-success">Agregar nuevo</a>*@
 
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
+                                        <th>Curso</th>
+                                        <th>Clave</th>
+                                        <th>Profesor</th>
                                         <th>Correo</th>
-                                        <th>Contraseña</th>
-                                        <th>Rol</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Usuario u in Model)
+                                    @foreach (Curso c in Model)
                                     {
                                         <tr>
                                             <td>
-                                                @u.Nombre
+                                                @c.Nombre
                                             </td>
                                             <td>
-                                                @u.Apellido
+                                                @c.Clave
                                             </td>
                                             <td>
-                                                @u.Correo
+                                                @c.Profesor.Nombre @c.Profesor.Apellido
                                             </td>
                                             <td>
-                                                @u.Contraseña
+                                                @c.Profesor.Correo
                                             </td>
                                             <td>
-                                                @u.Rol
-                                            </td>
-                                            <td>
-                                                <a href="@Url.Action("Registro", "Usuario", new { id = u.Id })" class="btn fa fa-edit btn-primary btn-circle"></a>
-                                                <a onclick="eliminar(@u.Id)" class="btn fa fa-trash btn-danger btn-circle"></a>
+                                                @*<a href="@Url.Action("Registro", "Estado", new { id = e.Id })" class="btn btn-primary">Editar</a>*@
+                                                <a class="btn btn-danger">Eliminar</a>
                                             </td>
                                         </tr>
 
@@ -63,5 +59,3 @@
         </div>
     </div>
 </div>
-
-<script src="~/Content/js/Schoology2/Usuario.js"></script>
