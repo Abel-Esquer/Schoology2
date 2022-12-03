@@ -1,0 +1,65 @@
+﻿@using Schoology2.Core.Entidades
+@model List<Usuario>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Usuarios</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        @*<a href="@Url.Action("Registro", "Estado", new { id = 0 })" class="btn btn-success">Agregar nuevo</a>*@
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Correo</th>
+                                        <th>Contraseña</th>
+                                        <th>Rol</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Usuario u in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @u.Nombre
+                                            </td>
+                                            <td>
+                                                @u.Apellido
+                                            </td>
+                                            <td>
+                                                @u.Correo
+                                            </td>
+                                            <td>
+                                                @u.Contraseña
+                                            </td>
+                                            <td>
+                                                @u.Rol
+                                            </td>
+                                            <td>
+                                                @*<a href="@Url.Action("Registro", "Estado", new { id = e.Id })" class="btn btn-primary">Editar</a>*@
+                                                <a class="btn btn-danger">Eliminar</a>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
