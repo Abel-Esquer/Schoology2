@@ -159,6 +159,44 @@ namespace Schoology2.Core.Entidades
             return usuario;
         }
 
+
+        public static List<Usuario> GetAllProfesores()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    string query = "SELECT * FROM usuario;";
+
+                    MySqlCommand command = new MySqlCommand(query, conexion.connection);
+
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Usuario usuario = new Usuario();
+                        usuario.Id = int.Parse(dataReader["id"].ToString());
+                        usuario.Nombre = dataReader["nombre"].ToString();
+                        usuario.Apellido = dataReader["apellido"].ToString();
+                        usuario.Correo = dataReader["correo"].ToString();
+                        usuario.Contraseña = dataReader["contraseña"].ToString();
+                        usuario.Rol = dataReader["rol"].ToString();
+
+                        usuarios.Add(usuario);
+                    }
+
+                    dataReader.Close();
+                    conexion.CloseConnection();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return usuarios;
+        }
     }
 }
 

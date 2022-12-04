@@ -17,7 +17,45 @@ namespace Schoology2.Core.Entidades
         public DateTime FechaActualizado { get; set; }
         public Publicacion IdPublicacion { get; set; }
 
+        public static List<Comentario> GetAll()
+        {
+            List<Comentario> comentarios = new List<Comentario>();
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    string query = "SELECT * FROM comentario;";
 
+                    MySqlCommand command = new MySqlCommand(query, conexion.connection);
+
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Comentario comentario = new Comentario();
+                        comentario.Id = int.Parse(dataReader["id"].ToString());
+                        comentario.Contenido = dataReader["contenido"].ToString();
+                        comentario.Alumno = dataReader["alumno"].ToString();
+                        if{ }
+                        comentario.FechaPublicado = dataReader["fechaPublicado"].ToString();
+                        comentario.FechaActualizado = dataReader["fechaActualizado"].ToString();
+                         = dataReader["contraseña"].ToString();
+                     
+
+                        comentarios.Add(comentario);
+                    }
+
+                    dataReader.Close();
+                    conexion.CloseConnection();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return usuarios;
+        }
         public static Comentario GetById(int id)
         {
             Comentario comentario = new Comentario();

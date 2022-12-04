@@ -12,7 +12,8 @@ namespace Schoology2.Web.Controllers
         // GET: Comentario
         public ActionResult Index()
         {
-            return View();
+            List<Comentario> comentarios = Comentario.GetAll();
+            return View(comentario);
         }
 
         public ActionResult Registro(int id)
