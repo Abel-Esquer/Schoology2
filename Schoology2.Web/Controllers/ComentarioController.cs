@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Schoology2.Core.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,12 @@ namespace Schoology2.Web.Controllers
         // GET: Comentario
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult Registro(int id)
+        {
+            Comentario comentario = Comentario.GetById(id);
             return View();
         }
     }

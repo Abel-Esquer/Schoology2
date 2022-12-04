@@ -212,6 +212,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
+    <Content Include="Views\Curso\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,7 @@ namespace Schoology2.Core.Entidades
         public static List<Curso> GetAll()
         {
             List<Curso> cursos = new List<Curso>();
+            
             try
             {
                 Conexion conexion = new Conexion();
@@ -55,6 +56,95 @@ namespace Schoology2.Core.Entidades
                 throw ex;
             }
             return cursos;
+        }
+
+        public static bool Guardar(int id, string nombre, string clave, int idProfesor) { 
+            bool result = false;
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    MySqlCommand cmd = conexion.connection.CreateCommand();
+
+                    if (id == 0)
+                    {
+                        cmd.CommandText = "INSERT INTO curso (nombre, clave, idProfesor) VALUES (@nombre, @clave, @idProfesor)";
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@clave", clave);
+                        cmd.Parameters.AddWithValue("@idProfesor", idProfesor);
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE curso SET nombre = @nombre, clave = @clave, idProfesor = @idProfesor WHERE id = @id";
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@idProfesor", idProfesor);
+                    }
+                    result = cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        public static bool Eliminar(int id)
+        {
+            bool result = false;
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    MySqlCommand cmd = conexion.connection.CreateCommand();
+                    cmd.CommandText = "DELETE FROM curso WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    result = cmd.ExecuteNonQuery() == 1;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return result;
+        }
+
+        public static Curso GetById(int id)
+        {
+            Curso curso = new Curso();
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    string query = "SELECT * FROM curso WHERE id = @id";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conexion.connection);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        curso.Id = int.Parse(dataReader["id"].ToString());
+                        curso.Nombre = dataReader["nombre"].ToString();
+                        curso.Clave = dataReader["clave"].ToString();
+
+                        Usuario usuario = new Usuario();
+                        usuario.Id = int.Parse(dataReader["pId"].ToString());
+                    }
+
+                    dataReader.Close();
+                    conexion.CloseConnection();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return curso;
         }
     }
 }
