@@ -1,5 +1,5 @@
 ﻿@using Schoology2.Core.Entidades
-@model Curso
+@model ModeloCursoProfesor
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -14,11 +14,20 @@
                     <div class="panel-body">
 
                         <form action="@Url.Action("Guardar", "Curso")">
-                            <input type="hidden" class="form-control" name="id" value="@Model.Id">
+                            <input type="hidden" class="form-control" name="id" value="@Model.Curso.Id">
                             <div class="form-group">
-                                <label>Nombre del curso:</label>
-
-                                <input class="form-control" name="nombre" value="@if(Model.Id != 0) {@Model.Nombre }" />
+                                <label>Curso:</label>
+                                <input class="form-control" name="curso" value="@if(Model.Curso.Id != 0) {@Model.Curso.Nombre }" />
+                                <label>Clave:</label>
+                                <input class="form-control" name="clave" value="@if(Model.Curso.Id != 0) {@Model.Curso.Clave }" />
+                                <label>Profesor:</label>
+                                <select name="idProfesor" id="profesor">
+                                    <option value="">Selecciona un opcion</option>
+                                    @foreach (Usuario p in Model.Profesor)
+                                    {
+                                        <option value="@p.Id">@p.Nombre @p.Apellido</option>
+                                    }
+                                </select>
                             </div>
 
                             <button class="btn btn-success" type="submit">Guardar</button>
@@ -32,4 +41,4 @@
     </div>
 </div>
 
-</div>
+

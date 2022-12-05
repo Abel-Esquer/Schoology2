@@ -79,6 +79,7 @@ namespace Schoology2.Core.Entidades
                         cmd.CommandText = "UPDATE curso SET nombre = @nombre, clave = @clave, idProfesor = @idProfesor WHERE id = @id";
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@nombre", nombre);
+                        cmd.Parameters.AddWithValue("@clave", clave);
                         cmd.Parameters.AddWithValue("@idProfesor", idProfesor);
                     }
                     result = cmd.ExecuteNonQuery() == 1;
@@ -120,7 +121,8 @@ namespace Schoology2.Core.Entidades
                 Conexion conexion = new Conexion();
                 if (conexion.OpenConnection())
                 {
-                    string query = "SELECT * FROM curso WHERE id = @id";
+                    string query = "SELECT c.id, c.nombre as curso, c.clave as clave, u.nombre as pNombre, u.apellido as pApellido, " +
+                        "u.correo as correo FROM curso as c INNER JOIN usuario as u ON c.idProfesor = u.id WHERE c.id = @id;";
 
                     MySqlCommand cmd = new MySqlCommand(query, conexion.connection);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -129,11 +131,15 @@ namespace Schoology2.Core.Entidades
                     while (dataReader.Read())
                     {
                         curso.Id = int.Parse(dataReader["id"].ToString());
-                        curso.Nombre = dataReader["nombre"].ToString();
+                        curso.Nombre = dataReader["curso"].ToString();
                         curso.Clave = dataReader["clave"].ToString();
 
                         Usuario usuario = new Usuario();
-                        usuario.Id = int.Parse(dataReader["pId"].ToString());
+                        usuario.Nombre = dataReader["pNombre"].ToString();
+                        usuario.Apellido = dataReader["pApellido"].ToString();
+                        usuario.Correo = dataReader["correo"].ToString();
+
+                        curso.Profesor = usuario;
                     }
 
                     dataReader.Close();

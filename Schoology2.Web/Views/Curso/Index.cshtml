@@ -42,11 +42,10 @@
                                                 @c.Profesor.Correo
                                             </td>
                                             <td>
-                                                @*<a href="@Url.Action("Registro", "Estado", new { id = e.Id })" class="btn btn-primary">Editar</a>*@
-                                                <a class="btn btn-danger">Eliminar</a>
+                                                <a href="@Url.Action("Registro", "Curso", new { id = c.Id })" class="btn fa fa-edit btn-primary btn-circle"></a>
+                                                <a onclick="eliminar(@c.Id)" class="btn fa fa-trash btn-danger btn-circle"></a>
                                             </td>
                                         </tr>
-
                                     }
 
                                 </tbody>
@@ -59,3 +58,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/Content/js/Schoology2/Curso.js"></script>

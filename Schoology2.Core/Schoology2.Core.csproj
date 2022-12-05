@@ -79,12 +79,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Database\Conexion.cs" />
-    <Compile Include="Entidades\Comentario.cs" />
     <Compile Include="Entidades\Curso.cs" />
     <Compile Include="Entidades\CursoUsuario.cs" />
-    <Compile Include="Entidades\Publicacion.cs" />
+    <Compile Include="Entidades\ModeloCursoProfesor.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

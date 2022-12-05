@@ -120,10 +120,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ComentarioController.cs" />
     <Compile Include="Controllers\CursoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PublicacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -170,6 +168,7 @@
     <Content Include="Content\js\morris-data.js" />
     <Content Include="Content\js\morris.min.js" />
     <Content Include="Content\js\raphael.min.js" />
+    <Content Include="Content\js\Schoology2\Curso.js" />
     <Content Include="Content\js\Schoology2\Usuario.js" />
     <Content Include="Content\js\startmin.js" />
     <Content Include="favicon.ico" />
@@ -217,8 +216,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Comentario\" />
-    <Folder Include="Views\Publicacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

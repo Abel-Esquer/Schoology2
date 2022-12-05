@@ -141,9 +141,13 @@
                         <li>
                             <a href="@Url.Action("Index", "Home")"><i class="fa fa-th fa-fw"></i> Inicio</a>
                         </li>
+                        @*@if (Session["perfil"].ToString() == "1")
+                        {*@
                         <li>
                             <a href="@Url.Action("Index", "Usuario")"><i class="fa  fa-users fa-fw"></i> Usuarios</a>
                         </li>
+                        @*}*@
+                        
                         <li>
                             <a href="@Url.Action("Index", "Curso")"><i class="fa  fa-users fa-fw"></i> Cursos</a>
                         </li>

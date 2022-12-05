@@ -25,13 +25,15 @@ DROP TABLE IF EXISTS `comentarios`;
 CREATE TABLE `comentarios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Contenido` tinytext NOT NULL,
-  `Alumno` varchar(100) NOT NULL,
   `FechaPublicado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `FechaActualizado` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `idPublicacion` int NOT NULL,
+  `idAlumno` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKcomentarios_publicacion_idx` (`idPublicacion`),
-  CONSTRAINT `FKcomentarios_publicacion` FOREIGN KEY (`idPublicacion`) REFERENCES `publicacion` (`id`)
+  KEY `FKcomentarios_usuario_idx` (`idAlumno`),
+  CONSTRAINT `FKcomentarios_publicacion` FOREIGN KEY (`idPublicacion`) REFERENCES `publicacion` (`id`),
+  CONSTRAINT `FKcomentarios_usuario` FOREIGN KEY (`idAlumno`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -59,7 +61,7 @@ CREATE TABLE `curso` (
   PRIMARY KEY (`id`),
   KEY `FKprofesor_curso_idx` (`idProfesor`),
   CONSTRAINT `FKprofesor_curso` FOREIGN KEY (`idProfesor`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +70,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` VALUES (1,'programacion 1','000001',2);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,13 +139,13 @@ DROP TABLE IF EXISTS `usuario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(45) NOT NULL,
-  `Apellido` varchar(45) NOT NULL,
-  `Correo` varchar(45) NOT NULL,
-  `Contraseña` varchar(45) NOT NULL,
-  `Rol` enum('admin','profesor','alumno') NOT NULL DEFAULT 'alumno',
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `correo` varchar(45) NOT NULL,
+  `contraseña` varchar(45) NOT NULL,
+  `rol` enum('admin','profesor','alumno') NOT NULL DEFAULT 'alumno',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +154,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'ivan','ramirez','ivan@correo.com','loquesea','admin'),(2,'abel','esquer ','abel@correo.com','loquesea','profesor'),(7,'julio','blanco','julio2@correo.com','loquesea','alumno'),(9,'taisa','ramirez','taisa@correo.com','loquesea','alumno');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-02 20:59:31
+-- Dump completed on 2022-12-04  1:48:05

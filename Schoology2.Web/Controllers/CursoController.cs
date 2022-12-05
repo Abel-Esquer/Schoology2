@@ -17,12 +17,14 @@ namespace Schoology2.Web.Controllers
         }
         public ActionResult Registro(int id)
         {
-            Curso curso = Curso.GetById(id);
-            return View(curso);
+            ModeloCursoProfesor modelo = new ModeloCursoProfesor();
+            modelo.Curso = Curso.GetById(id);
+            modelo.Profesor = Usuario.GetAllProfesores();
+            return View(modelo);
         }
-        public ActionResult Guardar(int id, string nombre, string clave, int idProfesor)
+        public ActionResult Guardar(int id, string curso, string clave, int idProfesor)
         {
-            Curso.Guardar(id, nombre, clave, idProfesor);
+            Curso.Guardar(id, curso, clave, idProfesor);
             return RedirectToAction("Index");
         }
         public ActionResult Eliminar(int id)
