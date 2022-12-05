@@ -15,7 +15,6 @@ namespace Schoology2.Web.Controllers
             List<Usuario> usuarios = Usuario.GetAll();
             return View(usuarios);
         }
-
         public ActionResult Registro(int id)
         {
             Usuario usuario = Usuario.GetById(id);
@@ -33,5 +32,11 @@ namespace Schoology2.Web.Controllers
             Usuario.Eliminar(id);
             return RedirectToAction("Index");
         }
+        public ActionResult GetAllAlumnos()
+        {
+            List<Usuario> usuarios = Usuario.GetAllAlumnos();
+            return View(usuarios);
+        }
+
     }
 }

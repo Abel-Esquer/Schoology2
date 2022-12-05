@@ -8,6 +8,7 @@ namespace Schoology2.Core.Entidades
 {
     public class ModeloCursoProfesor
     {
+        public List<Usuario> Alumno { get; set; }
         public List<Usuario> Profesor { get; set; }
         public Curso Curso { get; set; }
     }

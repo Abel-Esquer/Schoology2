@@ -1,10 +1,10 @@
 ﻿@using Schoology2.Core.Entidades
-@model List<Curso>
+@model List<Usuario>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Cursos</h1>
+                <h1 class="page-header">Usuarios</h1>
             </div>
         </div>
 
@@ -12,41 +12,46 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-
-                        <a href="@Url.Action("Registro", "Curso", new { id = 0 })" class="btn btn-success">Agregar nuevo</a>
-
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Curso</th>
-                                        <th>Clave</th>
-                                        <th>Profesor</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
                                         <th>Correo</th>
+                                        <th>Contraseña</th>
+                                        <th>Rol</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Curso c in Model)
+                                    @foreach (Usuario u in Usuario.GetAllAlumnos())
                                     {
                                         <tr>
                                             <td>
-                                                @c.Nombre
+                                                @u.Nombre
                                             </td>
                                             <td>
-                                                @c.Clave
+                                                @u.Apellido
                                             </td>
                                             <td>
-                                                @c.Profesor.Nombre @c.Profesor.Apellido
+                                                @u.Correo
                                             </td>
                                             <td>
-                                                @c.Profesor.Correo
+                                                @u.Contraseña
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("Registro", "Curso", new { id = c.Id })" class="btn fa fa-edit btn-primary btn-circle"></a>
-                                                <a onclick="eliminar(@c.Id)" class="btn fa fa-trash btn-danger btn-circle"></a>
-                                                <a href="@Url.Action("GetAllAlumnos", "Usuario", new { id = c.Id })" class="btn fa fa-plus btn-success btn-circle"></a>
+                                                @u.Rol
                                             </td>
+                                            <td>
+                                                <form href="@Url.Action("Aniadir", "CursoUsuario", @u.Id)"><a class="btn fa fa-plus btn-success btn-circle"></a></form>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Registro", "Usuario", new { id = u.Id })" class="btn fa fa-edit btn-primary btn-circle"></a>
+                                                <a onclick="eliminar(@u.Id)" class="btn fa fa-trash btn-danger btn-circle"></a>
+                                            </td>
+
                                         </tr>
+
                                     }
 
                                 </tbody>
@@ -60,4 +65,4 @@
     </div>
 </div>
 
-<script src="~/Content/js/Schoology2/Curso.js"></script>
+<script src="~/Content/js/Schoology2/Usuario.js"></script>

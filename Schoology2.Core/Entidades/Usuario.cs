@@ -205,7 +205,7 @@ namespace Schoology2.Core.Entidades
                 Conexion conexion = new Conexion();
                 if (conexion.OpenConnection())
                 {
-                    string query = "SELECT * FROM usuario WHERE rol = alumno;";
+                    string query = "SELECT * FROM usuario WHERE rol = 'alumno';";
 
                     MySqlCommand command = new MySqlCommand(query, conexion.connection);
 
@@ -234,6 +234,52 @@ namespace Schoology2.Core.Entidades
             }
             return usuarios;
         }
+
+        public static List<Usuario> GetAlumnosByCurso(int idCurso)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                Conexion conexion = new Conexion();
+                if (conexion.OpenConnection())
+                {
+                    string query = "SELECT c.id, c.nombre as curso, u.nombre as aNombre, u.apellido as aApellido, u.correo as correo, cu.idCurso as idCurso, cu.idAlumno as idAlumnno " +
+                        "FROM curso as c " +
+                        "INNER JOIN usuario as u" +
+                        "INNER JOIN curso_usuario as cu " +
+                        "ON u.id = cu.idAlumno and c.id = cu.idCurso" +
+                        "WHERE c.id = @idCurso;";
+
+                    MySqlCommand command = new MySqlCommand(query, conexion.connection);
+
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        Usuario usuario = new Usuario();
+                        usuario.Id = int.Parse(dataReader["id"].ToString());
+                        usuario.Nombre = dataReader["nombre"].ToString();
+                        usuario.Apellido = dataReader["apellido"].ToString();
+                        usuario.Correo = dataReader["correo"].ToString();
+                        usuario.Contraseña = dataReader["contraseña"].ToString();
+                        usuario.Rol = dataReader["rol"].ToString();
+
+                        usuarios.Add(usuario);
+                    }
+
+                    dataReader.Close();
+                    conexion.CloseConnection();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return usuarios;
+        }
+
+
+
     }
 }
 
