@@ -32,6 +32,7 @@ namespace Schoology2.Web.Controllers
             Usuario.Eliminar(id);
             return RedirectToAction("Index");
         }
+
         public ActionResult GetAllAlumnos()
         {
             List<Usuario> usuarios = Usuario.GetAllAlumnos();

@@ -15,13 +15,31 @@ namespace Schoology2.Web.Controllers
         {
             return View();
         }
-        public ActionResult Aniadir(int id, int idCurso, int idAlumno)
+        public ActionResult RegistrarAlumno(int id)
         {
-            ModeloCursoProfesor modelo = new ModeloCursoProfesor();
+            ModeloCursoUsuario modelo = new ModeloCursoUsuario();
             modelo.Curso = Curso.GetById(id);
-            modelo.Alumno = Usuario.GetAllAlumnos();
+            modelo.Usuario = Usuario.GetAllAlumnos();
+            modelo.CU = CursoUsuario.GetAll();
             return View(modelo);
         }
-    }
 
+        public ActionResult Aniadir(int idCurso, int idAlumno)
+        {
+            CursoUsuario.Aniadir(idCurso, idAlumno);
+            return RedirectToAction("Index","Curso");
+        }
+
+        public ActionResult Alumnado(int id)
+        {
+            List<CursoUsuario> CU = CursoUsuario.GetAlumnos(id);
+            return View(CU);
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            CursoUsuario.Eliminar(id);
+            return RedirectToAction("Index", "Curso");
+        }
+    }
 }

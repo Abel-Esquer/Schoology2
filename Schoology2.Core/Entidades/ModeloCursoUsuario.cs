@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Schoology2.Core.Entidades
 {
-    public class ModeloCursoProfesor
+    public class ModeloCursoUsuario
     {
-        public List<Usuario> Alumno { get; set; }
-        public List<Usuario> Profesor { get; set; }
+        public List<Usuario> Usuario { get; set; }
         public Curso Curso { get; set; }
+        public List<CursoUsuario> CU { get; set; }
     }
 }

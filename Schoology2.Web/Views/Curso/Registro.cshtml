@@ -1,5 +1,5 @@
 ﻿@using Schoology2.Core.Entidades
-@model ModeloCursoProfesor
+@model ModeloCursoUsuario
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -23,7 +23,7 @@
                                 <label>Profesor:</label>
                                 <select name="idProfesor" id="profesor">
                                     <option value="">Selecciona un opcion</option>
-                                    @foreach (Usuario p in Model.Profesor)
+                                    @foreach (Usuario p in Model.Usuario)
                                     {
                                         <option value="@p.Id">@p.Nombre @p.Apellido</option>
                                     }

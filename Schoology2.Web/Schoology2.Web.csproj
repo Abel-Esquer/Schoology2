@@ -169,6 +169,7 @@
     <Content Include="Content\js\morris-data.js" />
     <Content Include="Content\js\morris.min.js" />
     <Content Include="Content\js\raphael.min.js" />
+    <Content Include="Content\js\Schoology2\Alumnado.js" />
     <Content Include="Content\js\Schoology2\Curso.js" />
     <Content Include="Content\js\Schoology2\Usuario.js" />
     <Content Include="Content\js\startmin.js" />
@@ -213,12 +214,12 @@
     <Content Include="Views\Curso\Index.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Curso\Registro.cshtml" />
-    <Content Include="Views\Usuario\GetAllAlumnos.cshtml" />
+    <Content Include="Views\CursoUsuario\RegistrarAlumno.cshtml" />
+    <Content Include="Views\CursoUsuario\Alumnado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\CursoUsuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
